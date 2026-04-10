@@ -13,14 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-       return response()->json(
-        [
-        "data" => [
-        "id" => 1,
-        "title" => "Nice Post"
-         ]
-        ]
-       );
+       return Post::all();
     }
 
     /**
@@ -57,31 +50,47 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
+public function show(string $id)
+{
+    $post = Post::find($id);
+
+    if (!$post) {
+        return response()->json([
+            'message' => 'Post not found'
+        ], 404);
     }
+
+    return response()->json([
+        'post' => $post
+    ], 200);
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
         //
         $data = $request->validate([
-        'title'=> 'required|string|max:20',
-        'body'=> ['required','string','max:10']
+        'title'=> 'required|string|max:100',
+        'desc'=> ['required','string','max:100']
         ]);
 
 
-        return [$data];
+        $post->update($data);
+
+
+        return [$post];
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
+
+    $post->delete();
+    
         return response(
             [
                 "message"=>"Delete Post Successfully"
