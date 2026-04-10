@@ -54,6 +54,13 @@ logger("Title is ", [$title]);
     public function update(Request $request, string $id)
     {
         //
+        $data = $request->validate([
+        'title'=> 'required|string|max:20',
+        'body'=> ['required','string','max:10']
+        ]);
+
+
+        return [$data];
     }
 
     /**
