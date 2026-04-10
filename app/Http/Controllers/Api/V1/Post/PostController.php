@@ -12,7 +12,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+       return response()->json(
+        [
+        "data" => [
+        "id" => 1,
+        "title" => "Nice Post"
+         ]
+        ]
+       );
     }
 
     /**
@@ -20,7 +27,17 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+    $data = $request->all();
+    $title = $request->input('title');
+
+logger("Title is ", [$title]); 
+
+    return response([
+        "message"=>"Success",
+        "data"=> $data
+    ])->setStatusCode(200);
+        
     }
 
     /**

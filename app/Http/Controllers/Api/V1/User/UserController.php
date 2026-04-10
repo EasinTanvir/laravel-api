@@ -20,7 +20,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $data = $request -> all();
+        $titleAndDesc = $request -> only('title','desc');
+        $title = $request -> input('title');
         //
+
+        return response()->json([
+
+        "data"=> $data,
+        "titleAndDesc"=> $titleAndDesc,
+        "title"=> $title,
+
+        ]);
     }
 
     /**
