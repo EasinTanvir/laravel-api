@@ -68,6 +68,10 @@ logger("Title is ", [$title]);
      */
     public function destroy(string $id)
     {
-        //
+        return response(
+            [
+                "message"=>"Delete Post Successfully"
+            ]
+        )->noContent();
     }
 }
