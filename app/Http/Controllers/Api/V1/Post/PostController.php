@@ -15,7 +15,9 @@ class PostController extends Controller
      */
     public function index()
     {
-       return PostResource::collection(Post::all());
+    //    return PostResource::collection(Post::all());
+    //    return PostResource::collection(Post::with('author')->get());
+       return PostResource::collection(Post::with('author')->paginate(2));
     }
 
     /**
@@ -66,9 +68,7 @@ public function show(string $id)
         ], 404);
     }
 
-    return response()->json([
-        'post' => $post
-    ], 200);
+    return new PostResource($post);
 }
 
     /**
@@ -86,7 +86,7 @@ public function show(string $id)
         $post->update($data);
 
 
-        return [$post];
+          return response()->json(new PostResource($post));
     }
 
     /**
