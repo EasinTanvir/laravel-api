@@ -11,7 +11,14 @@ Route::get('/user', function (Request $request) {
 
 
 
-Route::get('/user',[UserController::class, "index"])->name("all user");
+
+
+Route::prefix('v1')->group(function(){
+
+  Route::apiResource("users", UserController::class);
+
+});
+
 
 
 Route::prefix('v1')->group(function(){

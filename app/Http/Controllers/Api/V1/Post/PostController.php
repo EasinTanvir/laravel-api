@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1\Post;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StorePostRequest;
+use App\Http\Resources\PostResource;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,7 @@ class PostController extends Controller
      */
     public function index()
     {
-       return Post::all();
+       return PostResource::collection(Post::all());
     }
 
     /**
@@ -37,10 +38,12 @@ class PostController extends Controller
 
    $post = Post::create($data);
 
-   return response()->json([
-    "message"=>"Post Create",
-    "data"=> $post
-   ])->setStatusCode(201);
+//    return response()->json([
+//     "message"=>"Post Create",
+//     "data"=> $post
+//    ])->setStatusCode(201);
+
+return response()->json(new PostResource($post),201);
 
    
 
