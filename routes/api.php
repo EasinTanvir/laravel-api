@@ -12,7 +12,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 
 
-Route::middleware('auth:sanctum')->group(function(){
+Route::middleware(['auth:sanctum', 'throttle:api'])->group(function(){
 
 
 Route::prefix('v1')->group(function(){
