@@ -7,6 +7,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 
 class PostResource extends JsonResource
 {
+
+//disabled the default data object when sending response
+
+public static $wrap = null;
+
     /**
      * Transform the resource into an array.
      *
